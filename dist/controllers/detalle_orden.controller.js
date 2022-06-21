@@ -14,15 +14,48 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteDetalleOrden = exports.updateDetalleOrden = exports.getDetalleOrden = exports.saveDetalleOrden = void 0;
 const Detalle_orden_1 = __importDefault(require("../models/Detalle_orden"));
+const Orden_1 = __importDefault(require("../models/Orden"));
+const Producto_1 = __importDefault(require("../models/Producto"));
 // SAVE ROLE FUNCTION
 const saveDetalleOrden = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const resp = yield Detalle_orden_1.default.create(req.body);
-        return res.json({
-            status: true,
-            msj: "DetalleOrden guardado correctamente",
-            resp
+        const { id_orden, id_producto, cantidad_producto, descuento } = req.body;
+        const orden = yield Orden_1.default.findOne({
+            where: id_orden
         });
+        if (orden.getDataValue("estado_orden") === false) {
+            const producto = yield Producto_1.default.findOne({
+                where: id_producto
+            });
+            let total_orden = parseInt(orden.getDataValue("total"));
+            const precio = parseFloat(producto.getDataValue("precio_unitario"));
+            let descuento_orden = parseFloat(orden.getDataValue("impuestos"));
+            let total = precio * parseInt(cantidad_producto);
+            const desc = descuento * total;
+            total -= desc;
+            total_orden += total;
+            descuento_orden += total * 0.13;
+            const resp = yield Detalle_orden_1.default.create({
+                id_orden,
+                id_producto,
+                cantidad_producto,
+                descuento,
+                subtotal: total
+            });
+            yield orden.update({ total: total_orden });
+            yield orden.update({ impuestos: descuento_orden });
+            return res.json({
+                status: true,
+                msj: "Pedido guardado correctamente",
+                resp
+            });
+        }
+        else {
+            return res.json({
+                status: true,
+                msj: "La orden ya ha sido cancelada",
+            });
+        }
     }
     catch (error) {
         return res.json({

@@ -22,15 +22,17 @@ Orden.init({
     },
     impuestos: {
         type: DataTypes.DECIMAL,
-        allowNull: true
+        allowNull: true,
+        defaultValue: 0.0
     },
     estado_orden: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false                
+        defaultValue: false               
     },   
     total: {
         type: DataTypes.DECIMAL,
-        allowNull: true
+        allowNull: true,
+        defaultValue: 0.0
     }
 }, {
     sequelize,

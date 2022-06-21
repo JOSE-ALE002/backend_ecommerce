@@ -34,7 +34,8 @@ Orden.init({
     },
     impuestos: {
         type: sequelize_1.DataTypes.DECIMAL,
-        allowNull: true
+        allowNull: true,
+        defaultValue: 0.0
     },
     estado_orden: {
         type: sequelize_1.DataTypes.BOOLEAN,
@@ -42,7 +43,8 @@ Orden.init({
     },
     total: {
         type: sequelize_1.DataTypes.DECIMAL,
-        allowNull: true
+        allowNull: true,
+        defaultValue: 0.0
     }
 }, {
     sequelize: connection_1.sequelize,
