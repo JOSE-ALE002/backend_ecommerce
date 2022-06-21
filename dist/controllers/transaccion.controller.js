@@ -14,9 +14,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteTransaccion = exports.updateTransaccion = exports.getTransacciones = exports.saveTransaccion = void 0;
 const Transaccion_1 = __importDefault(require("../models/Transaccion"));
+const Detalle_orden_1 = __importDefault(require("../models/Detalle_orden"));
+const Producto_1 = __importDefault(require("../models/Producto"));
 // SAVE Transaccion FUNCTION
 const saveTransaccion = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id_orden } = req.body;
     try {
+        const pedidos = yield Detalle_orden_1.default.findAll({
+            where: {
+                id_orden
+            }
+        });
+        pedidos.forEach((element) => __awaiter(void 0, void 0, void 0, function* () {
+            const cantidad = parseInt(element.getDataValue("cantidad_producto"));
+            const producto = yield Producto_1.default.findOne({
+                where: {
+                    id_producto: parseInt(element.getDataValue("id_producto"))
+                }
+            });
+            let stock = parseInt(producto.getDataValue("stock"));
+            stock -= cantidad;
+            yield producto.update({ stock });
+        }));
         const resp = yield Transaccion_1.default.create(req.body);
         return res.json({
             status: true,

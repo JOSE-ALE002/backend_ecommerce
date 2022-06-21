@@ -1,21 +1,48 @@
 import Transaccion from "../models/Transaccion"; 
+import Detalle_orden from "../models/Detalle_orden";
+import Orden from "../models/Orden";
 import { Request, Response } from "express";
+import Producto from "../models/Producto";
 
 // SAVE Transaccion FUNCTION
 export const saveTransaccion = async (req: Request, res: Response): Promise<Response> => {
+    const { id_orden } = req.body
+    
     try {
+        const pedidos = await Detalle_orden.findAll({
+            where: {
+                id_orden 
+            }
+        });
+
+        pedidos.forEach(async element => {
+
+            const cantidad : number = parseInt(element.getDataValue("cantidad_producto"));
+            const producto = await Producto.findOne({
+                where: {
+                    id_producto: parseInt(element.getDataValue("id_producto"))
+                }
+            }) as Producto;
+
+            let stock : number = parseInt(producto.getDataValue("stock"));
+            stock -= cantidad;
+
+            await producto.update({ stock });
+        });      
+        
         const resp = await Transaccion.create(req.body);
         return res.json({
             status: true,
             msj: "Transaccion guardado correctamente",
             resp
-        })        
+        });       
+        
     } catch (error) {
         return res.json({
             status: false,
             msj: "No se ha podido guardar el Transaccion",
             error
-        })        
+        });        
     }
 };
 
