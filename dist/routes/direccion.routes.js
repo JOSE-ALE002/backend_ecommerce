@@ -19,11 +19,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const verifyToken_1 = require("./../Middlewares/verifyToken");
 const express_1 = require("express");
 const DireccionCtrl = __importStar(require("../controllers/direccion.controller"));
 const router = (0, express_1.Router)();
-router.get("/", DireccionCtrl.getDirecciones);
-router.post("/save", DireccionCtrl.saveDireccion);
-router.put("/update/:id", DireccionCtrl.updateDireccion);
-router.delete("/delete/:id", DireccionCtrl.deleteDireccion);
+router.get("/", verifyToken_1.verifyToken, DireccionCtrl.getDirecciones);
+router.post("/save", verifyToken_1.verifyToken, DireccionCtrl.saveDireccion);
+router.put("/update/:id", verifyToken_1.verifyToken, DireccionCtrl.updateDireccion);
+router.delete("/delete/:id", verifyToken_1.verifyToken, DireccionCtrl.deleteDireccion);
 exports.default = router;

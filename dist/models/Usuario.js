@@ -26,12 +26,12 @@ Usuario.init({
     },
     id_tipo_usuario: {
         type: sequelize_1.DataTypes.SMALLINT,
-        allowNull: true,
         validate: {
             isInt: {
                 msg: "Debe ingresar un numero entero"
             }
-        }
+        },
+        defaultValue: 3
     },
     email: {
         type: sequelize_1.DataTypes.STRING(50),

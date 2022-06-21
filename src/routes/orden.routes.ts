@@ -1,13 +1,14 @@
+import { verifyToken } from './../Middlewares/verifyToken';
 import { Router } from "express";
 import * as OrdenCtrl from "../controllers/orden.controller";
 
 const router : Router = Router();
 
-router.get("/", OrdenCtrl.getOrdenes);
+router.get("/", verifyToken, OrdenCtrl.getOrdenes);
 
-router.post("/save", OrdenCtrl.saveOrden);
+router.post("/save", verifyToken, OrdenCtrl.saveOrden);
 
-router.put("/update/:id", OrdenCtrl.updateOrden);
+router.put("/update/:id", verifyToken, OrdenCtrl.updateOrden);
 
 router.delete("/delete/:id", OrdenCtrl.deleteOrden);
 

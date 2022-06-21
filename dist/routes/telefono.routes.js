@@ -19,11 +19,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const verifyToken_1 = require("./../Middlewares/verifyToken");
 const express_1 = require("express");
 const TelefonoCtrl = __importStar(require("../controllers/telefono.controller"));
 const router = (0, express_1.Router)();
-router.get("/", TelefonoCtrl.getTelefonos);
-router.post("/save", TelefonoCtrl.saveTelefono);
-router.put("/update/:id", TelefonoCtrl.updateTelefono);
-router.delete("/delete/:id", TelefonoCtrl.deleteTelefono);
+router.get("/", verifyToken_1.verifyToken, TelefonoCtrl.getTelefonos);
+router.post("/save", verifyToken_1.verifyToken, TelefonoCtrl.saveTelefono);
+router.put("/update/:id", verifyToken_1.verifyToken, TelefonoCtrl.updateTelefono);
+router.delete("/delete/:id", verifyToken_1.verifyToken, TelefonoCtrl.deleteTelefono);
 exports.default = router;

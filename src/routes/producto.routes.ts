@@ -5,7 +5,7 @@ import * as ProductoCtrl from "../controllers/producto.controller";
 
 const router : Router = Router();
 
-router.get("/", verifyToken, verifyUser, ProductoCtrl.getProductos);
+router.get("/", verifyToken, ProductoCtrl.getProductos);
 
 router.post("/save", verifyToken, verifyUser, ProductoCtrl.saveProducto);
 

@@ -1,14 +1,15 @@
+import { verifyToken } from './../Middlewares/verifyToken';
 import { Router } from "express";
 import * as DireccionCtrl from "../controllers/direccion.controller";
 
 const router : Router = Router();
 
-router.get("/", DireccionCtrl.getDirecciones);
+router.get("/", verifyToken, DireccionCtrl.getDirecciones);
 
-router.post("/save", DireccionCtrl.saveDireccion);
+router.post("/save", verifyToken, DireccionCtrl.saveDireccion);
 
-router.put("/update/:id", DireccionCtrl.updateDireccion);   
+router.put("/update/:id", verifyToken, DireccionCtrl.updateDireccion);   
 
-router.delete("/delete/:id", DireccionCtrl.deleteDireccion);
+router.delete("/delete/:id", verifyToken, DireccionCtrl.deleteDireccion);
 
 export default router;

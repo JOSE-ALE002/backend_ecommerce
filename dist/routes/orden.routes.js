@@ -19,11 +19,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const verifyToken_1 = require("./../Middlewares/verifyToken");
 const express_1 = require("express");
 const OrdenCtrl = __importStar(require("../controllers/orden.controller"));
 const router = (0, express_1.Router)();
-router.get("/", OrdenCtrl.getOrdenes);
-router.post("/save", OrdenCtrl.saveOrden);
-router.put("/update/:id", OrdenCtrl.updateOrden);
+router.get("/", verifyToken_1.verifyToken, OrdenCtrl.getOrdenes);
+router.post("/save", verifyToken_1.verifyToken, OrdenCtrl.saveOrden);
+router.put("/update/:id", verifyToken_1.verifyToken, OrdenCtrl.updateOrden);
 router.delete("/delete/:id", OrdenCtrl.deleteOrden);
 exports.default = router;

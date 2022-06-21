@@ -19,11 +19,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const verifyUser_1 = require("./../Middlewares/verifyUser");
+const verifyToken_1 = require("./../Middlewares/verifyToken");
 const express_1 = require("express");
 const EnvioCtrl = __importStar(require("../controllers/envio.controller"));
 const router = (0, express_1.Router)();
-router.get("/", EnvioCtrl.getEnvios);
-router.post("/save", EnvioCtrl.saveEnvio);
-router.put("/update/:id", EnvioCtrl.updateEnvio);
-router.delete("/delete/:id", EnvioCtrl.deleteEnvio);
+router.get("/", verifyToken_1.verifyToken, verifyUser_1.verifyUser, EnvioCtrl.getEnvios);
+router.post("/save", verifyToken_1.verifyToken, EnvioCtrl.saveEnvio);
+router.put("/update/:id", verifyToken_1.verifyToken, verifyUser_1.verifyUser, EnvioCtrl.updateEnvio);
+router.delete("/delete/:id", verifyToken_1.verifyToken, verifyUser_1.verifyUser, EnvioCtrl.deleteEnvio);
 exports.default = router;

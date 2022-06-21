@@ -19,11 +19,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const verifyUser_1 = require("./../Middlewares/verifyUser");
+const verifyToken_1 = require("./../Middlewares/verifyToken");
 const express_1 = require("express");
 const MunicipioCtrl = __importStar(require("../controllers/municipio.controller"));
 const router = (0, express_1.Router)();
-router.get("/", MunicipioCtrl.getMunicipios);
-router.post("/save", MunicipioCtrl.saveMunicipio);
-router.put("/update/:id", MunicipioCtrl.updateMunicipio);
-router.delete("/delete/:id", MunicipioCtrl.deleteMunicipio);
+router.get("/", verifyToken_1.verifyToken, verifyUser_1.verifyUser, MunicipioCtrl.getMunicipios);
+router.post("/save", verifyToken_1.verifyToken, verifyUser_1.verifyUser, MunicipioCtrl.saveMunicipio);
+router.put("/update/:id", verifyToken_1.verifyToken, verifyUser_1.verifyUser, MunicipioCtrl.updateMunicipio);
+router.delete("/delete/:id", verifyToken_1.verifyToken, verifyUser_1.verifyUser, MunicipioCtrl.deleteMunicipio);
 exports.default = router;

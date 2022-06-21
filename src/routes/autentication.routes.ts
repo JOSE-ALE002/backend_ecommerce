@@ -3,7 +3,7 @@ import { verifyToken } from './../Middlewares/verifyToken';
 import { Router } from "express";
 import Usuario from "../models/Usuario";
 import { compare, hash,genSalt } from "bcrypt";
-import { sign, verify } from 'jsonwebtoken';
+import { sign } from 'jsonwebtoken';
 
 const router: Router = Router();
 

@@ -1,14 +1,16 @@
+import { verifyUser } from './../Middlewares/verifyUser';
+import { verifyToken } from './../Middlewares/verifyToken';
 import { Router } from "express";
 import * as EnvioCtrl from "../controllers/envio.controller";
 
 const router : Router = Router();
 
-router.get("/", EnvioCtrl.getEnvios);
+router.get("/", verifyToken, verifyUser, EnvioCtrl.getEnvios);
 
-router.post("/save", EnvioCtrl.saveEnvio);
+router.post("/save", verifyToken, EnvioCtrl.saveEnvio);
 
-router.put("/update/:id", EnvioCtrl.updateEnvio);
+router.put("/update/:id", verifyToken, verifyUser, EnvioCtrl.updateEnvio);
 
-router.delete("/delete/:id", EnvioCtrl.deleteEnvio);
+router.delete("/delete/:id", verifyToken, verifyUser, EnvioCtrl.deleteEnvio);
 
 export default router;

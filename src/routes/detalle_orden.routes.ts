@@ -1,14 +1,15 @@
+import { verifyToken } from './../Middlewares/verifyToken';
 import { Router } from "express";
 import * as DetalleOrdenCtrl from "../controllers/detalle_orden.controller";
 
 const router : Router = Router();
 
-router.get("/", DetalleOrdenCtrl.getDetalleOrden);
+router.get("/", verifyToken, DetalleOrdenCtrl.getDetalleOrden);
 
-router.post("/save", DetalleOrdenCtrl.saveDetalleOrden);
+router.post("/save", verifyToken, DetalleOrdenCtrl.saveDetalleOrden);
 
-router.put("/update/:id", DetalleOrdenCtrl.updateDetalleOrden);
+router.put("/update/:id", verifyToken, DetalleOrdenCtrl.updateDetalleOrden);
 
-router.delete("/delete/:id", DetalleOrdenCtrl.deleteDetalleOrden);
+router.delete("/delete/:id", verifyToken, DetalleOrdenCtrl.deleteDetalleOrden);
 
 export default router;

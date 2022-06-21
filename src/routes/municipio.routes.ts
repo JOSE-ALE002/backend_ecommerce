@@ -1,14 +1,16 @@
+import { verifyUser } from './../Middlewares/verifyUser';
+import { verifyToken } from './../Middlewares/verifyToken';
 import { Router } from "express";
 import * as MunicipioCtrl from "../controllers/municipio.controller";
 
 const router : Router = Router();
 
-router.get("/", MunicipioCtrl.getMunicipios);
+router.get("/", verifyToken, verifyUser, MunicipioCtrl.getMunicipios);
 
-router.post("/save", MunicipioCtrl.saveMunicipio);
+router.post("/save", verifyToken, verifyUser, MunicipioCtrl.saveMunicipio);
 
-router.put("/update/:id", MunicipioCtrl.updateMunicipio);   
+router.put("/update/:id", verifyToken, verifyUser, MunicipioCtrl.updateMunicipio);   
 
-router.delete("/delete/:id", MunicipioCtrl.deleteMunicipio);
+router.delete("/delete/:id", verifyToken, verifyUser, MunicipioCtrl.deleteMunicipio);
 
 export default router;

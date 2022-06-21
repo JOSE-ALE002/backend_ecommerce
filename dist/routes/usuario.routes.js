@@ -19,11 +19,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const verifyUser_1 = require("./../Middlewares/verifyUser");
+const verifyToken_1 = require("./../Middlewares/verifyToken");
 const express_1 = require("express");
 const UsuarioCtrl = __importStar(require("../controllers/usuario.controller"));
 const router = (0, express_1.Router)();
-router.get("/", UsuarioCtrl.getUsuarios);
-router.post("/save", UsuarioCtrl.saveUsuario);
-router.put("/update/:id", UsuarioCtrl.updateUsuario);
-router.delete("/delete/:id", UsuarioCtrl.deleteUsuario);
+router.get("/", verifyToken_1.verifyToken, verifyUser_1.verifyUser, UsuarioCtrl.getUsuarios);
+router.post("/save", verifyToken_1.verifyToken, verifyUser_1.verifyUser, UsuarioCtrl.saveUsuario);
+router.put("/update/:id", verifyToken_1.verifyToken, UsuarioCtrl.updateUsuario);
+router.delete("/delete/:id", verifyToken_1.verifyToken, verifyUser_1.verifyUser, UsuarioCtrl.deleteUsuario);
 exports.default = router;

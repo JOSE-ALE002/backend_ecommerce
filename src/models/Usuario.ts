@@ -13,12 +13,12 @@ Usuario.init({
     },
     id_tipo_usuario: {
         type: DataTypes.SMALLINT,
-        allowNull: true,
         validate: {
             isInt: {
                 msg: "Debe ingresar un numero entero"
             }
-        } 
+        },
+        defaultValue: 3
     },
     email: {
         type: DataTypes.STRING(50),
