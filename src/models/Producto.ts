@@ -9,7 +9,6 @@ Producto.init({
     codigo_producto: {
         type: DataTypes.STRING(50),
         primaryKey: true,
-        autoIncrement: true,
         allowNull: true,        
         unique: true
     },
