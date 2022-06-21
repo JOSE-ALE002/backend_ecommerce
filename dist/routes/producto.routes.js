@@ -24,7 +24,7 @@ const verifyUser_1 = require("./../Middlewares/verifyUser");
 const verifyToken_1 = require("./../Middlewares/verifyToken");
 const ProductoCtrl = __importStar(require("../controllers/producto.controller"));
 const router = (0, express_1.Router)();
-router.get("/", ProductoCtrl.getProductos);
+router.get("/", verifyToken_1.verifyToken, verifyUser_1.verifyUser, ProductoCtrl.getProductos);
 router.post("/save", verifyToken_1.verifyToken, verifyUser_1.verifyUser, ProductoCtrl.saveProducto);
 router.put("/update/:id", verifyToken_1.verifyToken, verifyUser_1.verifyUser, ProductoCtrl.updateProducto);
 router.delete("/delete/:id", verifyToken_1.verifyToken, verifyUser_1.verifyUser, ProductoCtrl.deleteProducto);

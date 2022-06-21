@@ -23,7 +23,7 @@ const verifyUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     if (user.getDataValue("id_tipo_usuario") == 3) {
         return res.json({
             status: false,
-            msj: "No autorizado"
+            msj: "Usuario no autorizado"
         });
     }
     else {

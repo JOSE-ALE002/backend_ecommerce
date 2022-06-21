@@ -18,7 +18,7 @@ export const verifyUser = async (req: Request, res: Response, next: NextFunction
     if(user.getDataValue("id_tipo_usuario") as number == 3) {
         return res.json({
             status: false,
-            msj: "No autorizado"            
+            msj: "Usuario no autorizado"            
         });     
     } else {
         next()
