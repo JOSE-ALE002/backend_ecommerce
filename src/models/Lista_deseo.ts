@@ -10,9 +10,10 @@ Lista_deseo.init({
         type: DataTypes.INTEGER,        
         allowNull: true,        
     },
-    id_producto: {
-        type: DataTypes.INTEGER,
-        allowNull: true
+    codigo_producto: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
+        unique: true
     }
 }, {
     sequelize,
@@ -27,7 +28,7 @@ Lista_deseo.belongsTo(Usuario, {
 });
 
 Lista_deseo.belongsTo(Producto, {
-    foreignKey: "id_producto",
+    foreignKey: "codigo_producto",
     onDelete: "CASCADE",
     onUpdate: "CASCADE"
 });

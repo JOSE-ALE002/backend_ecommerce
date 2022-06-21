@@ -20,14 +20,10 @@ Detalle_orden.init({
             }
         } 
     },
-    id_producto: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        validate: {
-            isInt: {
-                msg: "Debe ingresar un numero entero"
-            }
-        } 
+    codigo_producto: {
+        type: DataTypes.STRING(50),
+        allowNull: true,        
+        unique: true
     },
     cantidad_producto: {
         type: DataTypes.INTEGER,
@@ -56,7 +52,7 @@ Detalle_orden.belongsTo(Orden, {
 });
 
 Detalle_orden.belongsTo(Producto, {
-    foreignKey: "id_producto",
+    foreignKey: "codigo_producto",
     onDelete: "CASCADE",
     onUpdate: "CASCADE"
 });

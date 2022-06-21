@@ -11,14 +11,10 @@ Pedido_proveedor.init({
         primaryKey: true,
         autoIncrement: true,  
     },
-    id_producto: {
-        type: DataTypes.INTEGER,
+    codigo_producto: {
+        type: DataTypes.STRING(50),
         allowNull: true,
-        validate: {
-            isInt: {
-                msg: "Debe ingresar un numero entero"
-            }
-        } 
+        unique: true 
     },
     id_proveedor: {
         type: DataTypes.INTEGER,
@@ -52,7 +48,7 @@ Pedido_proveedor.belongsTo(Proveedor, {
 });
 
 Pedido_proveedor.belongsTo(Producto, {
-    foreignKey: "id_producto",
+    foreignKey: "codigo_producto",
     onDelete: "CASCADE",
     onUpdate: "CASCADE"
 });

@@ -27,7 +27,6 @@ const detalle_tarjeta_routes_1 = __importDefault(require("./routes/detalle_tarje
 const direccion_routes_1 = __importDefault(require("./routes/direccion.routes"));
 const empleado_routes_1 = __importDefault(require("./routes/empleado.routes"));
 const envio_routes_1 = __importDefault(require("./routes/envio.routes"));
-// import historial_envio from "./routes/";
 const lista_deseo_routes_1 = __importDefault(require("./routes/lista_deseo.routes"));
 const municipio_routes_1 = __importDefault(require("./routes/municipio.routes"));
 const orden_routes_1 = __importDefault(require("./routes/orden.routes"));
@@ -35,7 +34,6 @@ const pedido_prov_routes_1 = __importDefault(require("./routes/pedido_prov.route
 const producto_routes_1 = __importDefault(require("./routes/producto.routes"));
 const proveedor_routes_1 = __importDefault(require("./routes/proveedor.routes"));
 const puesto_empresa_routes_1 = __importDefault(require("./routes/puesto_empresa.routes"));
-const subcategorias_routes_1 = __importDefault(require("./routes/subcategorias.routes"));
 const tel_proveedor_routes_1 = __importDefault(require("./routes/tel_proveedor.routes"));
 const telefono_routes_1 = __importDefault(require("./routes/telefono.routes"));
 const tipo_tarjeta_routes_1 = __importDefault(require("./routes/tipo_tarjeta.routes"));
@@ -78,7 +76,6 @@ app.use("/api/detalle_prov", detalle_proveedor_routes_1.default);
 app.use("/api/tel_prov", tel_proveedor_routes_1.default);
 app.use("/api/categoria_prov", categoria_proveedor_routes_1.default);
 app.use("/api/producto", producto_routes_1.default);
-app.use("/api/subcategoria", subcategorias_routes_1.default);
 app.use("/api/lista_deseo", lista_deseo_routes_1.default);
 app.use("/api/envio ", envio_routes_1.default);
 app.use("/api/orders", orden_routes_1.default);

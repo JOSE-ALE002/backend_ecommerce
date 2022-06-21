@@ -43,7 +43,7 @@ export const updateProducto = async (req: Request, res: Response): Promise<Respo
     try {
         const resp = await Producto.update(data, {
             where: {
-                id_producto: id
+                codigo_producto: id
             }
         });
         
@@ -74,7 +74,7 @@ export const deleteProducto = async (req: Request, res: Response): Promise<Respo
     try {
         const producto = await Producto.findOne({
             where: {
-                id_producto: id
+                codigo_producto: id
             }
         });        
 

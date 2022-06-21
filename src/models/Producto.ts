@@ -6,11 +6,12 @@ import Proveedor from "./Proveedor";
 class Producto extends Model {}
 
 Producto.init({
-    id_producto: {
-        type: DataTypes.INTEGER,
+    codigo_producto: {
+        type: DataTypes.STRING(50),
         primaryKey: true,
         autoIncrement: true,
         allowNull: true,        
+        unique: true
     },
     id_categoria: {
         type: DataTypes.INTEGER,

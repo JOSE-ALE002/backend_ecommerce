@@ -20,7 +20,7 @@ export const saveTransaccion = async (req: Request, res: Response): Promise<Resp
             const cantidad : number = parseInt(element.getDataValue("cantidad_producto"));
             const producto = await Producto.findOne({
                 where: {
-                    id_producto: parseInt(element.getDataValue("id_producto"))
+                    codigo_producto: parseInt(element.getDataValue("codigo_producto"))
                 }
             }) as Producto;
 
