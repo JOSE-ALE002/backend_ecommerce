@@ -14,7 +14,6 @@ import detalle_tarjeta from "./routes/detalle_tarjeta.routes";
 import direccion from "./routes/direccion.routes";
 import empleado from "./routes/empleado.routes";
 import envio from "./routes/envio.routes";
-// import historial_envio from "./routes/";
 import lista_deseo from "./routes/lista_deseo.routes";
 import municipio from "./routes/municipio.routes";
 import orden from "./routes/orden.routes";
