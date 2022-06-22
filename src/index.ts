@@ -67,7 +67,7 @@ app.use("/api/tel_prov", tel_proveedor);
 app.use("/api/categoria_prov", categoria_Proveedor);
 app.use("/api/producto", producto);
 app.use("/api/lista_deseo", lista_deseo);
-app.use("/api/envio ", envio);
+app.use("/api/envio", envio);
 app.use("/api/orders", orden);
 app.use("/api/detalle_orden", detalle_orden);
 app.use("/api/transaccion", transaccion);

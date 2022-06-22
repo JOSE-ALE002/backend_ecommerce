@@ -28,11 +28,6 @@ Detalle_orden.init({
         type: DataTypes.INTEGER,
         allowNull: true
     },    
-    descuento: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-        defaultValue: 0
-    },
     subtotal: {
         type: DataTypes.DECIMAL,
         allowNull: true

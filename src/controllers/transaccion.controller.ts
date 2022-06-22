@@ -1,4 +1,4 @@
-import Transaccion from "../models/Transaccion"; 
+import Transaccion from "../models/Transaccion";
 import Detalle_orden from "../models/Detalle_orden";
 import Orden from "../models/Orden";
 import { Request, Response } from "express";
@@ -7,50 +7,53 @@ import Producto from "../models/Producto";
 // SAVE Transaccion FUNCTION
 export const saveTransaccion = async (req: Request, res: Response): Promise<Response> => {
     const { id_orden } = req.body
-    
+
     try {
         const pedidos = await Detalle_orden.findAll({
             where: {
-                id_orden 
+                id_orden
             }
         });
 
         pedidos.forEach(async element => {
+            try {
+                let cantidad: number = parseInt(element.getDataValue("cantidad_producto"));
+                const producto = await Producto.findOne({
+                    where: {
+                        codigo_producto: element.getDataValue("codigo_producto") as string
+                    }
+                }) as Producto;
 
-            const cantidad : number = parseInt(element.getDataValue("cantidad_producto"));
-            const producto = await Producto.findOne({
-                where: {
-                    codigo_producto: parseInt(element.getDataValue("codigo_producto"))
-                }
-            }) as Producto;
+                let stock: number = parseInt(producto.getDataValue("stock"));
+                stock -= cantidad;
 
-            let stock : number = parseInt(producto.getDataValue("stock"));
-            stock -= cantidad;
+                await producto.update({ stock });
+            } catch (error) {
+                console.log(error);
+            }
+        });
 
-            await producto.update({ stock });
-        });      
-        
         const resp = await Transaccion.create(req.body);
         return res.json({
             status: true,
             msj: "Transaccion guardado correctamente",
             resp
-        });       
-        
+        });
+
     } catch (error) {
         return res.json({
             status: false,
             msj: "No se ha podido guardar el Transaccion",
             error
-        });        
+        });
     }
 };
 
 // GET TransaccionS FUNCTION
-export const getTransacciones = async (req: Request, res: Response): Promise<Response> => { 
+export const getTransacciones = async (req: Request, res: Response): Promise<Response> => {
     //Promise<Response<any, Record<string, any>>>
     try {
-        const transacciones = await Transaccion.findAll();        
+        const transacciones = await Transaccion.findAll();
         return res.json({
             status: "Success",
             transacciones
@@ -64,7 +67,7 @@ export const getTransacciones = async (req: Request, res: Response): Promise<Res
 };
 
 // UPDATE Transaccion FUNCTION
-export const updateTransaccion = async (req: Request, res: Response): Promise<Response> => {    
+export const updateTransaccion = async (req: Request, res: Response): Promise<Response> => {
     const data = req.body;
     const id = req.params.id;
     try {
@@ -73,8 +76,8 @@ export const updateTransaccion = async (req: Request, res: Response): Promise<Re
                 id_transaccion: id
             }
         });
-        
-        if(resp[0] === 0) {
+
+        if (resp[0] === 0) {
             return res.status(402).json({
                 status: false,
                 msj: "Transaccion no encontrado"
@@ -84,7 +87,7 @@ export const updateTransaccion = async (req: Request, res: Response): Promise<Re
         return res.json({
             status: true,
             msj: "Transaccion actualizado",
-            resp            
+            resp
         });
     } catch (error) {
         return res.json({
@@ -103,9 +106,9 @@ export const deleteTransaccion = async (req: Request, res: Response): Promise<Re
             where: {
                 id_transaccion: id
             }
-        });        
+        });
 
-        if(transaccion === null) {
+        if (transaccion === null) {
             return res.status(402).json({
                 status: false,
                 msj: "Transaccion no encontrado"
@@ -120,7 +123,7 @@ export const deleteTransaccion = async (req: Request, res: Response): Promise<Re
         });
     } catch (error) {
         return res.json({
-            status: false, 
+            status: false,
             error
         });
     }

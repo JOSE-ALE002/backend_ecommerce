@@ -5,9 +5,9 @@ import { Request, Response } from "express";
 
 // SAVE ROLE FUNCTION
 export const saveDetalleOrden = async (req: Request, res: Response): Promise<Response> => {
-    try {              
-        const { id_orden, codigo_producto, cantidad_producto, descuento } = req.body;
-        
+    try {
+        const { id_orden, codigo_producto, cantidad_producto } = req.body;
+
         const orden = await Orden.findOne({
             where: id_orden
         }) as Orden;
@@ -18,39 +18,46 @@ export const saveDetalleOrden = async (req: Request, res: Response): Promise<Res
                     codigo_producto
                 }
             }) as Producto;
-            
-            let total_orden: number = parseInt(orden.getDataValue("total"));
-            
-            const precio: number = parseFloat(producto.getDataValue("precio_unitario"));
-            let descuento_orden : number = parseFloat(orden.getDataValue("impuestos"));
-            let total: number = precio * parseInt(cantidad_producto);
-            const desc: number = descuento * total;
 
-            total -= desc;
-            total_orden+= total;
-            descuento_orden += total * 0.13;
+            if (parseInt(cantidad_producto) <= parseInt(producto.getDataValue("stock"))) {
+                let total_orden: number = parseInt(orden.getDataValue("total"));
 
-            const resp = await DetalleOrden.create({
-                id_orden, 
-                codigo_producto,
-                cantidad_producto,
-                descuento,
-                subtotal: total                
-            });
+                const precio: number = parseFloat(producto.getDataValue("precio_unitario"));
+                let descuento_orden: number = parseFloat(producto.getDataValue("descuento"));
+                let total: number = precio * parseInt(cantidad_producto);
+                const desc: number = descuento_orden * total;
 
-            await orden.update({ total: total_orden });
-            await orden.update({ impuestos: descuento_orden });
+                total -= desc;
 
-            return res.json({
-                status: true,
-                msj: "Pedido guardado correctamente",
-                resp
-            });
+                total_orden += total;
+                descuento_orden += total * 0.13;
+
+                const resp = await DetalleOrden.create({
+                    id_orden,
+                    codigo_producto,
+                    cantidad_producto,
+                    subtotal: total
+                });
+
+                await orden.update({ total: total_orden });
+                await orden.update({ impuestos: descuento_orden });
+
+                return res.json({
+                    status: true,
+                    msj: "Pedido guardado correctamente",
+                    resp
+                });
+            } else {
+                return res.json({
+                    status: "Failed",
+                    msj: "No es posible realizar el pedido porque la cantidad supera al stock disponible del producto",
+                });
+            }
         } else {
             return res.json({
                 status: true,
-                msj: "La orden ya ha sido cancelada",                
-            }); 
+                msj: "La orden ya ha sido cancelada",
+            });
         }
     } catch (error) {
         return res.json({
