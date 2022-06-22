@@ -61,7 +61,7 @@ Detalle_tarjeta.belongsTo(Tipo_tarjeta, {
 
 (async() => {
     try {
-        await Detalle_tarjeta.sync({ alter: true });
+        await Detalle_tarjeta.sync();
     } catch (error) {
         console.log("Error en modelo Detalle_tarjeta");
         console.log(error);
