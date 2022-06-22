@@ -19,7 +19,7 @@ Categoria.init({
     }
 }, {
     sequelize,
-    modelName: "categoria",
+    modelName: "categorias",
     timestamps: true
 });
 

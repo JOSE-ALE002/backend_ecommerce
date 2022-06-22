@@ -7,9 +7,10 @@ class Detalle_tarjeta extends Model {}
 
 Detalle_tarjeta.init({
     numero_tarjeta: {
-        type: DataTypes.STRING(25),
+        type: DataTypes.STRING(200),
         allowNull: true,
         primaryKey: true, 
+        unique: true
     },
     id_usuario: {
         type: DataTypes.INTEGER,
@@ -35,7 +36,8 @@ Detalle_tarjeta.init({
     },
     numero_cvv: {
         type: DataTypes.SMALLINT,
-        allowNull: true
+        allowNull: true,
+        unique: true
     }
 }, {
     sequelize,
@@ -59,7 +61,7 @@ Detalle_tarjeta.belongsTo(Tipo_tarjeta, {
 
 (async() => {
     try {
-        await Detalle_tarjeta.sync();
+        await Detalle_tarjeta.sync({ alter: true });
     } catch (error) {
         console.log("Error en modelo Detalle_tarjeta");
         console.log(error);

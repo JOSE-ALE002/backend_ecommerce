@@ -44,7 +44,8 @@ Envio.init({
 }, {
     sequelize,
     modelName: "envios",
-    timestamps: true
+    timestamps: true,
+    updatedAt: "fecha_actualizacion_estado"
 });
 
 Envio.belongsTo(Direccion, {

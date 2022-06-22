@@ -23,7 +23,6 @@ Detalle_orden.init({
     codigo_producto: {
         type: DataTypes.STRING(50),
         allowNull: true,        
-        unique: true
     },
     cantidad_producto: {
         type: DataTypes.INTEGER,

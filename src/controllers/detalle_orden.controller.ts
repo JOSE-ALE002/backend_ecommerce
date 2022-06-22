@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 
 // SAVE ROLE FUNCTION
 export const saveDetalleOrden = async (req: Request, res: Response): Promise<Response> => {
-    try {
+    try {              
         const { id_orden, codigo_producto, cantidad_producto, descuento } = req.body;
         
         const orden = await Orden.findOne({
@@ -14,7 +14,9 @@ export const saveDetalleOrden = async (req: Request, res: Response): Promise<Res
 
         if (orden.getDataValue("estado_orden") as boolean === false) {
             const producto = await Producto.findOne({
-                where: codigo_producto
+                where: {
+                    codigo_producto
+                }
             }) as Producto;
             
             let total_orden: number = parseInt(orden.getDataValue("total"));

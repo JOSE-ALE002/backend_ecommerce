@@ -36,6 +36,10 @@ Producto.init({
         type: DataTypes.SMALLINT,
         allowNull: true,        
     },
+    costo_unitario: {
+        type: DataTypes.DECIMAL,
+        allowNull: true,        
+    },
     descuento: {
         type: DataTypes.DECIMAL,
         allowNull: true,       

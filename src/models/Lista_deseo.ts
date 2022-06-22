@@ -13,12 +13,12 @@ Lista_deseo.init({
     codigo_producto: {
         type: DataTypes.STRING(50),
         allowNull: true,
-        unique: true
     }
 }, {
     sequelize,
     modelName: "lista_deseos",
-    createdAt: true
+    createdAt: true,
+    updatedAt: false
 });
 
 Lista_deseo.belongsTo(Usuario, {

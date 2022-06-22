@@ -37,7 +37,8 @@ Orden.init({
 }, {
     sequelize,
     modelName: "ordenes",
-    timestamps: true
+    updatedAt: true,
+    createdAt: "fecha_orden"
 });
 
 Orden.belongsTo(Usuario, {

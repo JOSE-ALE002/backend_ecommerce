@@ -8,8 +8,6 @@ class Categoria_Proveedor extends Model {};
 Categoria_Proveedor.init({
     id_proveedor: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
         allowNull: true        
     },
     id_categoria: {
@@ -42,7 +40,7 @@ Categoria_Proveedor.belongsTo(Categoria, {
 
 (async() => {
     try {
-        await Categoria_Proveedor.sync({ alter: true});
+        await Categoria_Proveedor.sync( );
     } catch (error) {
         console.log("Error en modelo Categoria_Proveedor");
         console.log(error);

@@ -1,8 +1,10 @@
 import DetalleTarjeta from "../models/Detalle_tarjeta";
+import { genSalt, hash } from 'bcrypt';
 import { Request, Response } from "express";
 
 // SAVE ROLE FUNCTION
 export const saveDetalleTarjeta = async (req: Request, res: Response): Promise<Response> => {
+    req.body.numero_tarjeta = await hash(req.body.numero_tarjeta, await genSalt(10)); 
     try {
         const resp = await DetalleTarjeta.create(req.body);
         return res.json({
