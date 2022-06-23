@@ -24,7 +24,11 @@ Se proporcionan una serie de pasos para permitir la ejecucion del proyecto, los 
 
     npm install typescript --save-dev   
     
-### 3. Instalar nodemon
+### 4. Compilar el proyecto
+
+    tsc -w
+    
+### 3. instalar nodemon 
 
     npm i nodemon -D
     
