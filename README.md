@@ -19,7 +19,7 @@ Se proporcionan una serie de pasos para permitir la ejecucion del proyecto, los 
 
 ### 1. Ejecutar el archivo package.json
 
-    npm init
+    npm install
 ### 2. Instalar Typescript
 
     npm install typescript --save-dev   
