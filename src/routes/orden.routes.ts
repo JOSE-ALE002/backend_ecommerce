@@ -6,6 +6,8 @@ const router : Router = Router();
 
 router.get("/", verifyToken, OrdenCtrl.getOrdenes);
 
+router.get("/find/:id", verifyToken, OrdenCtrl.findOrden);
+
 router.post("/save", verifyToken, OrdenCtrl.saveOrden);
 
 router.put("/update/:id", verifyToken, OrdenCtrl.updateOrden);

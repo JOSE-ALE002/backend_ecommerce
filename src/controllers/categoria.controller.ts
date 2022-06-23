@@ -7,7 +7,7 @@ export const saveCategoria = async (req: Request, res: Response): Promise<Respon
         const resp = await Categoria.create(req.body);
         return res.json({
             status: true,
-            msj: "Categoria guardado correctamente",
+            msj: "Categoria guardada correctamente",
             resp
         })        
     } catch (error) {
@@ -50,7 +50,7 @@ export const updateCategoria = async (req: Request, res: Response): Promise<Resp
         if(resp[0] === 0) {
             return res.status(402).json({
                 status: false,
-                msj: "Categoria no encontrado"
+                msj: "Categoria no encontrada"
             });
         }
 
@@ -81,14 +81,14 @@ export const deleteCategoria = async (req: Request, res: Response): Promise<Resp
         if(categoria === null) {
             return res.status(402).json({
                 status: false,
-                msj: "Categoria no encontrado"
+                msj: "Categoria no encontrada"
             });
         }
 
         await categoria.destroy();
         return res.json({
             status: true,
-            msj: "Categoria eliminado",
+            msj: "Categoria eliminada",
             categoria
         });
     } catch (error) {

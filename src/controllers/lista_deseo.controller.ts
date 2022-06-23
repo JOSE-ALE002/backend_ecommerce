@@ -7,13 +7,13 @@ export const saveListaDeseo = async (req: Request, res: Response): Promise<Respo
         const resp = await ListaDeseo.create(req.body);
         return res.json({
             status: true,
-            msj: "ListaDeseo guardado correctamente",
+            msj: "Producto agregado correctamente a la lista de deseos",
             resp
         })        
     } catch (error) {
         return res.json({
             status: false,
-            msj: "No se ha podido guardar la ListaDeseo",
+            msj: "No se ha podido guardar el producto en la lista de deseos",
             error
         })        
     }
@@ -27,6 +27,27 @@ export const getListaDeseos = async (req: Request, res: Response): Promise<Respo
         return res.json({
             status: "Success",
             detalles
+        })
+    } catch (error) {
+        return res.json({
+            status: "Failed",
+            error
+        });
+    }
+};
+
+export const findListaDeseo = async (req: Request, res: Response): Promise<Response> => {
+    const id = req.params.id;
+
+    try {
+        const lista_deseo = await ListaDeseo.findAll({
+            where: {
+                id_usuario: id
+            }
+        });
+        return res.json({
+            status: "Success",
+            lista_deseo
         })
     } catch (error) {
         return res.json({

@@ -19,6 +19,35 @@ export const saveOrden = async (req: Request, res: Response): Promise<Response> 
     }
 };
 
+export const findOrden = async (req: Request, res: Response): Promise<Response> => {
+    const id = req.params.id;
+
+    try {
+        const orden = await Orden.findOne({
+            where: {
+                id_orden: id
+            }
+        });
+
+        if(orden === null) {
+            return res.status(402).json({
+                status: false,
+                msj: "Orden no encontrado"
+            });
+        };
+        
+        return res.json({
+            status: "Success",
+            orden
+        })
+    } catch (error) {
+        return res.json({
+            status: "Failed",
+            error
+        });
+    }
+};
+
 // GET ROLES FUNCTION
 export const getOrdenes = async (req: Request, res: Response): Promise<Response> => { 
     //Promise<Response<any, Record<string, any>>>

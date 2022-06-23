@@ -62,9 +62,30 @@ export const saveDetalleOrden = async (req: Request, res: Response): Promise<Res
     } catch (error) {
         return res.json({
             status: false,
-            msj: "No se ha podido guardar la DetalleOrden",
+            msj: "No se ha podido guardar la Pedido",
             error
         })
+    }
+};
+
+export const findPedidos = async (req: Request, res: Response): Promise<Response> => {
+    const id = req.params.id;
+
+    try {
+        const pedidos = await DetalleOrden.findAll({
+            where: {
+                id_orden: id
+            }
+        });
+        return res.json({
+            status: "Success",
+            pedidos
+        })
+    } catch (error) {
+        return res.json({
+            status: "Failed",
+            error
+        });
     }
 };
 
@@ -99,13 +120,13 @@ export const updateDetalleOrden = async (req: Request, res: Response): Promise<R
         if (resp[0] === 0) {
             return res.status(402).json({
                 status: false,
-                msj: "DetalleOrden no encontrado"
+                msj: "Pedido no encontrado"
             });
         }
 
         return res.json({
             status: true,
-            msj: "DetalleOrden actualizado",
+            msj: "Pedido actualizado",
             resp
         });
     } catch (error) {
@@ -130,14 +151,14 @@ export const deleteDetalleOrden = async (req: Request, res: Response): Promise<R
         if (detalles === null) {
             return res.status(402).json({
                 status: false,
-                msj: "DetalleOrden no encontrado"
+                msj: "Pedido no encontrado"
             });
         }
 
         await detalles.destroy();
         return res.json({
             status: true,
-            msj: "DetalleOrden eliminado",
+            msj: "Pedido eliminado",
             detalles
         });
     } catch (error) {

@@ -5,7 +5,7 @@ import * as EmpleadoCtrl from "../controllers/empleado.controller";
 
 const router : Router = Router();
 
-router.get("/", verifyToken, verifyUser, verifyToken, EmpleadoCtrl.getEmpleados);
+router.get("/", verifyToken, verifyUser, EmpleadoCtrl.getEmpleados);
 
 router.post("/save", verifyToken, verifyUser, EmpleadoCtrl.saveEmpleado);
 

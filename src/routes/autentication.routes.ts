@@ -55,8 +55,7 @@ router.post("/login", async (req, res) => {
     } else {
         return res.json({
             status: false,
-            msj: "No autorizado",
-            token: null
+            msj: "Contraseña incorrecta",            
         }); 
     }     
 });

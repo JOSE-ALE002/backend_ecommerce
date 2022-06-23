@@ -9,13 +9,13 @@ export const saveDetalleTarjeta = async (req: Request, res: Response): Promise<R
         const resp = await DetalleTarjeta.create(req.body);
         return res.json({
             status: true,
-            msj: "DetalleTarjeta guardado correctamente",
+            msj: "Tarjeta guardada correctamente",
             resp
         })        
     } catch (error) {
         return res.json({
             status: false,
-            msj: "No se ha podido guardar la DetalleTarjeta",
+            msj: "No se ha podido guardar la Tarjeta",
             error
         })        
     }
@@ -52,13 +52,13 @@ export const updateDetalleTarjeta = async (req: Request, res: Response): Promise
         if(resp[0] === 0) {
             return res.status(402).json({
                 status: false,
-                msj: "DetalleTarjeta no encontrado"
+                msj: "Tarjeta no encontrado"
             });
         }
 
         return res.json({
             status: true,
-            msj: "DetalleTarjeta actualizado",
+            msj: "Tarjeta actualizado",
             resp            
         });
     } catch (error) {
@@ -83,14 +83,14 @@ export const deleteDetalleTarjeta = async (req: Request, res: Response): Promise
         if(detalles === null) {
             return res.status(402).json({
                 status: false,
-                msj: "DetalleTarjeta no encontrado"
+                msj: "Tarjeta no encontrado"
             });
         }
 
         await detalles.destroy();
         return res.json({
             status: true,
-            msj: "DetalleTarjeta eliminado",
+            msj: "Tarjeta eliminado",
             detalles
         });
     } catch (error) {

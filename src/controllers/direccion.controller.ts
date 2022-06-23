@@ -7,13 +7,13 @@ export const saveDireccion = async (req: Request, res: Response): Promise<Respon
         const resp = await Direccion.create(req.body);
         return res.json({
             status: true,
-            msj: "Direccion guardado correctamente",
+            msj: "Direccion guardada correctamente",
             resp
         })        
     } catch (error) {
         return res.json({
             status: false,
-            msj: "No se ha podido guardar la Direccion",
+            msj: "No se ha podido guardar la direccion",
             error
         })        
     }
@@ -24,6 +24,27 @@ export const getDirecciones = async (req: Request, res: Response): Promise<Respo
     //Promise<Response<any, Record<string, any>>>
     try {
         const direcciones = await Direccion.findAll();        
+        return res.json({
+            status: "Success",
+            direcciones
+        })
+    } catch (error) {
+        return res.json({
+            status: "Failed",
+            error
+        });
+    }
+};
+
+export const findDireccion = async (req: Request, res: Response): Promise<Response> => {
+    const id = req.params.id;
+
+    try {
+        const direcciones = await Direccion.findAll({
+            where: {
+                id_usuario: id
+            }
+        });
         return res.json({
             status: "Success",
             direcciones
@@ -56,7 +77,7 @@ export const updateDireccion = async (req: Request, res: Response): Promise<Resp
 
         return res.json({
             status: true,
-            msj: "Direccion actualizado",
+            msj: "Direccion actualizada",
             resp            
         });
     } catch (error) {
@@ -88,7 +109,7 @@ export const deleteDireccion = async (req: Request, res: Response): Promise<Resp
         await dir.destroy();
         return res.json({
             status: true,
-            msj: "Direccion eliminado",
+            msj: "Direccion eliminada",
             dir
         });
     } catch (error) {

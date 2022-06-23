@@ -13,7 +13,7 @@ export const saveEnvio = async (req: Request, res: Response): Promise<Response> 
     } catch (error) {
         return res.json({
             status: false,
-            msj: "No se ha podido guardar la Envio",
+            msj: "No se ha podido guardar el Envio",
             error
         })        
     }

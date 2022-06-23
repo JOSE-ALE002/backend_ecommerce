@@ -7,7 +7,7 @@ export const savePuestoEmpresa = async (req: Request, res: Response): Promise<Re
         const resp = await PuestoEmpresa.create(req.body);
         return res.json({
             status: true,
-            msj: "PuestoEmpresa guardado correctamente",
+            msj: "Puesto guardado correctamente",
             resp
         })        
     } catch (error) {
@@ -50,13 +50,13 @@ export const updatePuestoEmpresa = async (req: Request, res: Response): Promise<
         if(resp[0] === 0) {
             return res.status(402).json({
                 status: false,
-                msj: "PuestoEmpresa no encontrado"
+                msj: "Puesto no encontrado"
             });
         }
 
         return res.json({
             status: true,
-            msj: "PuestoEmpresa actualizado",
+            msj: "Puesto actualizado",
             resp            
         });
     } catch (error) {
@@ -81,14 +81,14 @@ export const deletePuestoEmpresa = async (req: Request, res: Response): Promise<
         if(puesto === null) {
             return res.status(402).json({
                 status: false,
-                msj: "PuestoEmpresa no encontrado"
+                msj: "Puesto no encontrado"
             });
         }
 
         await puesto.destroy();
         return res.json({
             status: true,
-            msj: "Rol eliminado",
+            msj: "Puesto eliminado",
             puesto
         });
     } catch (error) {

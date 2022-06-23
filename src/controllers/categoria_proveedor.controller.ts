@@ -7,7 +7,7 @@ export const saveCategoria_Proveedor = async (req: Request, res: Response): Prom
         const resp = await Categoria_Proveedor.create(req.body);
         return res.json({
             status: true,
-            msj: "Categoria_Proveedor guardado correctamente",
+            msj: "Categoria_Proveedor guardada correctamente",
             resp
         })        
     } catch (error) {
@@ -48,7 +48,7 @@ export const findCategory = async (req: Request, res: Response): Promise<Respons
         if(categorias_p === null) {
             return res.status(402).json({
                 status: false,
-                msj: "Categoria_Proveedor no encontrado"
+                msj: "Categoria_Proveedor no encontrada"
             });
         }
 

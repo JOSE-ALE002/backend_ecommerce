@@ -14,8 +14,17 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
         msj: 'Acceso denegado'
     });
 
-    const payload = verify(token, process.env.SECRET!) as IPayload;
+    try {
+        const payload = verify(token, process.env.SECRET!) as IPayload;
+        req.userId = payload.id;
+        next();
+        
+    } catch (error) {
+        res.send({
+            status: "Failed",
+            msj: "Ha ocurrido un error",
+            error
+        })
+    }
     
-    req.userId = payload.id;
-    next();
 };

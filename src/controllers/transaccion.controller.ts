@@ -36,14 +36,14 @@ export const saveTransaccion = async (req: Request, res: Response): Promise<Resp
         const resp = await Transaccion.create(req.body);
         return res.json({
             status: true,
-            msj: "Transaccion guardado correctamente",
+            msj: "Transaccion guardada correctamente",
             resp
         });
 
     } catch (error) {
         return res.json({
             status: false,
-            msj: "No se ha podido guardar el Transaccion",
+            msj: "No se ha podido guardar la Transaccion",
             error
         });
     }
@@ -80,13 +80,13 @@ export const updateTransaccion = async (req: Request, res: Response): Promise<Re
         if (resp[0] === 0) {
             return res.status(402).json({
                 status: false,
-                msj: "Transaccion no encontrado"
+                msj: "Transaccion no encontrada"
             });
         }
 
         return res.json({
             status: true,
-            msj: "Transaccion actualizado",
+            msj: "Transaccion actualizada",
             resp
         });
     } catch (error) {
@@ -111,14 +111,14 @@ export const deleteTransaccion = async (req: Request, res: Response): Promise<Re
         if (transaccion === null) {
             return res.status(402).json({
                 status: false,
-                msj: "Transaccion no encontrado"
+                msj: "Transaccion no encontrada"
             });
         }
 
         await transaccion.destroy();
         return res.json({
             status: true,
-            msj: "Transaccion eliminado",
+            msj: "Transaccion eliminada",
             transaccion
         });
     } catch (error) {

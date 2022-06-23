@@ -7,7 +7,7 @@ export const saveDptoEmpresa = async (req: Request, res: Response): Promise<Resp
         const resp = await DptoEmpresa.create(req.body);
         return res.json({
             status: true,
-            msj: "DptoEmpresa guardado correctamente",
+            msj: "Dpto_Empresa guardado correctamente",
             resp
         })        
     } catch (error) {
@@ -50,13 +50,13 @@ export const updateDptoEmpresa = async (req: Request, res: Response): Promise<Re
         if(resp[0] === 0) {
             return res.status(402).json({
                 status: false,
-                msj: "DptoEmpresa no encontrado"
+                msj: "Dpto_Empresa no encontrado"
             });
         }
 
         return res.json({
             status: true,
-            msj: "DptoEmpresa actualizado",
+            msj: "Dpto_Empresa actualizado",
             resp            
         });
     } catch (error) {
@@ -81,14 +81,14 @@ export const deleteDptoEmpresa = async (req: Request, res: Response): Promise<Re
         if(dptoEmpresa === null) {
             return res.status(402).json({
                 status: false,
-                msj: "DptoEmpresa no encontrado"
+                msj: "Dpto_Empresa no encontrado"
             });
         }
 
         await dptoEmpresa.destroy();
         return res.json({
             status: true,
-            msj: "DptoEmpresa eliminado",
+            msj: "Dpto_Empresa eliminado",
             dptoEmpresa
         });
     } catch (error) {

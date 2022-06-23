@@ -50,7 +50,7 @@ export const updatePedidoProveedor = async (req: Request, res: Response): Promis
         if(resp[0] === 0) {
             return res.status(402).json({
                 status: false,
-                msj: "PedidoProveedor no encontrado"
+                msj: "Pedido no encontrado"
             });
         }
 

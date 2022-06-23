@@ -12,4 +12,6 @@ router.put("/update/:id", verifyToken, DetalleOrdenCtrl.updateDetalleOrden);
 
 router.delete("/delete/:id", verifyToken, DetalleOrdenCtrl.deleteDetalleOrden);
 
+router.get("/find/:id", verifyToken, DetalleOrdenCtrl.findPedidos);
+
 export default router;
