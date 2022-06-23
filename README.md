@@ -24,6 +24,10 @@ Se proporcionan una serie de pasos para permitir la ejecucion del proyecto, los 
 
     npm install typescript --save-dev   
     
+### 3. Instalar nodemon
+
+    npm i nodemon -D
+    
 ### 3. Ejecutar el servidor
 
     nodemon dist
