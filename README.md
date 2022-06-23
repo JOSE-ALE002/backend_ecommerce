@@ -6,7 +6,7 @@
 - Carlos Ivan Romero Hernandez - RH18030
 
 ## Descripcion del proyecto.
-El presente proyecto muestra la estrutura para el mapeo de la base datos para un sistema ecommerce, el cual contiene los modelos, rutas y operaciones nesesarias para la interaccion con la base de datos desde el servidor postgres para la gestion de la informacion. 
+El presente proyecto muestra la estrutura para el mapeo de la base datos de un sistema ecommerce, el cual contiene los modelos, rutas y operaciones nesesarias para la interaccion con la base de datos desde el servidor postgres para la gestion de la informacion. 
 
 ## Recursos utilizados para su desarrollo
 - Typescrypt: El proyecto esta creado con el lenguaje typescrypt.
